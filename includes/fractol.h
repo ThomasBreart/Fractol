@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/18 17:21:21 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/18 19:13:19 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef	struct s_var
 	double	plan_ord;
 	int		win_abs;
 	int		win_ord;
+	int		iteration_max;;
 	int		iterations;
 }			t_var;
 
@@ -42,5 +43,5 @@ void	display();
 void	draw2(t_env *e);
 t_var	*get_var(void);
 void	prepare_draw(t_env *e);
-void	img_pixel_put(t_env *e, int x, int y, int i);
+void	img_pixel_put(t_env *e, int x, int y, t_var *var);
 #endif

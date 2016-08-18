@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/18 14:08:16 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/18 15:13:24 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/18 21:01:35 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	draw2(t_env *e)
 {
-	double		plan_x1 = -2.5;
-	double		plan_x2 = 1;
+	double		plan_x1 = -2;
+	double		plan_x2 = 2;
 	double		plan_y1 = -1.5;
 	double		plan_y2 = 1.5;
 
-	int		image_x = 500;
+	int		image_x = 1000;
 	int		image_y = 1000;
 	int		iteration_max = 50;
 	double		zoom_x;
