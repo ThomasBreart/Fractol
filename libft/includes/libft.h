@@ -6,7 +6,7 @@
 /*   By: tbreart <tbreart@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 13:15:52 by tbreart           #+#    #+#             */
-/*   Updated: 2016/06/19 17:56:10 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/18 15:36:47 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/types.h>
-# include "get_next_line.h"
 
 char		*s_itoa(int n, const char *filename);
 void		*s_memalloc(size_t size, const char *filename);

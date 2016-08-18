@@ -3,7 +3,7 @@ NAME = fractol
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g
 LIBFT = libft/
-LMLX = -lmlx -framework OpenGL -framework AppKit -L/usr/X11/lib
+LMLX = -lmlx -framework OpenGL -framework AppKit# -L/usr/X11/lib
 IDIR = includes/
 SRC := $(filter %.c, $(shell find src -type f))
 
@@ -20,7 +20,7 @@ $(NAME): $(OBJ)
 
 %.o: %.c
 	@echo "-> Compiling $<"
-	@$(CC) $(FLAGS) -I inc/ -o $@ -c $<
+	@$(CC) $(FLAGS) -I includes/ -o $@ -c $<
 
 clean:
 	@echo "Removing obj files"

@@ -6,80 +6,86 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:34:05 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/18 14:33:09 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/18 17:39:06 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		dot_bornay(double x, double y)
+double	ft_carre(double x)
+{
+	return (x * x);
+}
+
+int		limited_dot(double pixel_x, double pixel_y, t_var *var)
 {
 	double		z;
-	double		tmpx;
-	double		tmpy;
-	int			iterations;
+	double		c_x;
+	double		c_y;
 	double		tmp;
 
-	x = x / 250 - 2;
-	y = y / 250 - 2;
-	tmpx = x;
-	tmpy = y;
-//	z = (x * x) - (y * y);
-	iterations = 100;
-	while (iterations > 0)
+	pixel_x = pixel_x / (var->win_abs / 4) - 3;
+	pixel_y = pixel_y / (var->win_ord / 4) - 2;
+
+	c_x = pixel_x;
+	c_y = pixel_y;
+	var->iterations = 50;
+	while (var->iterations > 0)
 	{
-		tmp = x;
-		x = 2 * x * y + tmpx;
-		y = (-1) * (tmp * tmp) + (y * y) + tmpy;
-	//	z = (z * z) + ((x * x) - (y * y));
-	//	z = z * z + (0.32 * 0.32) - (0.043 * 0.043);
-		z = (x * x) + (y * y);
-		if (z > 4) // 4 ou 2
+		tmp = pixel_x;
+		pixel_x = ft_carre(pixel_x) - ft_carre(pixel_y) + c_x;
+		pixel_y = 2 * tmp * pixel_y + c_y;
+		z = ft_carre(pixel_x) + ft_carre(pixel_y);
+		if (z > 4)
 			return (0);
-		--iterations;
+		--var->iterations; // creer un tmp des iterations
 	}
 	return (1);
 }
 
 void	draw(t_env *e)
 {
-	double		x;
-	double		y;
+	double		pixel_x;
+	double		pixel_y;
+	t_var		*var;
 
-	x = 0;
-	y = 0;
-	while (y < 1000)
+	var = get_var();
+	pixel_x = 0;
+	pixel_y = 0;
+	while (pixel_y < var->win_ord)
 	{
-		x = 0;
-		while (x < 1000)
+		pixel_x = 0;
+		while (pixel_x < var->win_abs)
 		{
-			//»·img_pixel_put(e, x, y, tmp);
-			if (dot_bornay(x, y) == 1)
-				mlx_pixel_put(e->mlx, e->win, x, y, 0x000000);
+			if (limited_dot(pixel_x, pixel_y, var) == 1)
+				img_pixel_put(e, pixel_x, pixel_y, 1);
 			else
-				mlx_pixel_put(e->mlx, e->win, x, y, 0xFF0000);
-			++x;
+				img_pixel_put(e, pixel_x, pixel_y, 0);
+			++pixel_x;
 		}
-		++y;
+		++pixel_y;
 	}
 }
 
 int		expose_hook(t_env *e)
 {
-	//prepare_draw(e);
-	mlx_clear_window(e->mlx, e->win);
-	//draw(e);
-	draw2(e);
-	//mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
+	prepare_draw(e);
+	draw(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
 	return (0);
 }
 
 void	display(void)
 {
 	t_env	e;
+	t_var	*var;
 
+	e.img_ptr = NULL;
+	var = get_var();
+	var->win_abs = 1000;
+	var->win_ord = 1000;
 	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, 1000, 1000, "Fractol - 42");
+	e.win = mlx_new_window(e.mlx, var->win_abs, var->win_ord, "Fractol - 42");
 	mlx_expose_hook(e.win, expose_hook, &e);
 //	mlx_key_hook(e.win, key_hook, &e);
 	mlx_loop(e.mlx);
