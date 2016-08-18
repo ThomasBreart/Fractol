@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:34:05 by tbreart           #+#    #+#             */
-/*   Updated: 2016/07/28 05:11:23 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/18 14:33:09 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int		expose_hook(t_env *e)
 {
 	//prepare_draw(e);
 	mlx_clear_window(e->mlx, e->win);
-	draw(e);
+	//draw(e);
+	draw2(e);
 	//mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
 	return (0);
 }

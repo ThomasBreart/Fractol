@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/07/28 05:18:02 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/18 14:32:43 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ typedef	struct s_env
 }			t_env;
 
 void	display(void);
-
+void	draw2(t_env *e);
 #endif

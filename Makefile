@@ -1,62 +1,34 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tbreart <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/04/29 13:22:18 by tbreart           #+#    #+#              #
-#    Updated: 2015/05/11 23:18:14 by tbreart          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-# mac / linux
-OS = mac
-NAME = fdf
+NAME = fractol
 CC = cc
-ifeq ($(OS),mac)
-	LMLX = -lmlx -framework OpenGL -framework AppKit -L/usr/X11/lib #pour mac
-else
-	LMLX = -L/usr/X11/lib -lmlx -lXext -lX11 #pour linux
-endif
-
-FLAGS = -Wall -Wextra -Werror
-IDIR = includes/
-SDIR = src/
+FLAGS = -Wall -Wextra -Werror -g
 LIBFT = libft/
-SRC = $(SDIR)color_max_hight.c \
-	$(SDIR)create_elem.c \
-	$(SDIR)display.c \
-	$(SDIR)draw_line.c \
-	$(SDIR)key_hook.c \
-	$(SDIR)main.c \
-	$(SDIR)parse.c \
-	$(SDIR)prepare_draw.c \
-	$(SDIR)projections.c \
-	$(SDIR)draw_line_x.c \
-	$(SDIR)draw_line_y.c
+LMLX = -lmlx -framework OpenGL -framework AppKit -L/usr/X11/lib
+IDIR = includes/
+SRC := $(filter %.c, $(shell find src -type f))
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "-> sur $(OS)"
-	@make -C $(LIBFT) re
-	@echo "-> Creation $(NAME)"
-	@$(CC) -o $@ $^ $(FLAGS) $(LIBFT)libft.a $(LMLX) -I $(IDIR)
+	@echo "-> Building libft"
+	@make -C $(LIBFT)
+	@echo "-> Linkin"
+	@$(CC) -o $@ $(OBJ) $(FLAGS) $(LIBFT)libft.a $(LMLX) -I $(IDIR)
+	@echo "-> Perfect !"
 
 %.o: %.c
-	@echo "-> Compilation $<"
-	@$(CC) $(FLAGS) -o $@ -c $< -I $(IDIR)
+	@echo "-> Compiling $<"
+	@$(CC) $(FLAGS) -I inc/ -o $@ -c $<
 
 clean:
-	@echo "Suppression des fichiers objet"
+	@echo "Removing obj files"
 	@rm -f $(OBJ)
 	@make -C $(LIBFT) clean
 
 fclean: clean
-	@echo "Suppression du binaire"
+	@echo "Removing binary"
 	@rm -f $(NAME)
 	@make -C $(LIBFT) fclean
 
