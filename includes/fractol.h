@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/18 19:13:19 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/19 15:24:19 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_FRACTOL_H
 
 #include <stdio.h>
+#include <unistd.h>
 
 #include <mlx.h>
 #include <math.h>
@@ -31,8 +32,12 @@ typedef	struct s_env
 
 typedef	struct s_var
 {
-	double	plan_abs; //double ?
-	double	plan_ord;
+	double	plan_x1; //double ?
+	double	plan_x2; //double ?
+	double	plan_y1;
+	double	plan_y2;
+	double	zoom_x;
+	double	zoom_y;
 	int		win_abs;
 	int		win_ord;
 	int		iteration_max;;

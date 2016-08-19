@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:34:05 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/18 21:21:30 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/19 16:53:21 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int		limited_dot(double pixel_x, double pixel_y, t_var *var)
 	double		c_y;
 	double		tmp;
 
-	pixel_x = pixel_x / (var->win_abs / 4) - var->plan_abs;
-	pixel_y = pixel_y / (var->win_ord / 4) - var->plan_ord;
+	pixel_x = pixel_x / var->zoom_x + var->plan_x1;
+	pixel_y = pixel_y / var->zoom_y + var->plan_y1;
+	//pixel_x = pixel_x / (var->win_abs / 4) - var->plan_abs;
+	//pixel_y = pixel_y / (var->win_ord / 4) - var->plan_ord;
 //printf("abs: %f, ord: %f\n", var->plan_abs, var->plan_ord);
 	c_x = pixel_x;
 	c_y = pixel_y;
@@ -68,9 +70,9 @@ void	draw(t_env *e)
 
 int		expose_hook(t_env *e)
 {
-//	prepare_draw(e);
-	draw2(e);
-//	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
+	prepare_draw(e);
+	draw(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
 	return (0);
 }
 
@@ -79,8 +81,25 @@ void	zoom_up(void)
 	t_var	*var;
 
 	var = get_var();
-	var->plan_abs = var->plan_abs - 0.5;
-	var->plan_ord = var->plan_ord - 0.5;
+	var->zoom_x = var->zoom_x * 1.5;
+	var->zoom_y = var->zoom_y * 1.5;
+	var->plan_x1 = var->plan_x1 / 1.5;
+	var->plan_x2 = var->plan_x2 / 1.5;
+	var->plan_y1 = var->plan_y1 / 1.5;
+	var->plan_y2 = var->plan_y2 / 1.5;
+}
+
+void	zoom_down(void)
+{
+	t_var	*var;
+
+	var = get_var();
+	var->zoom_x = var->zoom_x / 1.5;
+	var->zoom_y = var->zoom_y / 1.5;
+	var->plan_x1 = var->plan_x1 * 1.5;
+	var->plan_x2 = var->plan_x2 * 1.5;
+	var->plan_y1 = var->plan_y1 * 1.5;
+	var->plan_y2 = var->plan_y2 * 1.5;
 }
 
 int		key_hook(int keycode, t_env *e)
@@ -89,8 +108,42 @@ int		key_hook(int keycode, t_env *e)
 		exit(0);
 	if (keycode == 126)
 		zoom_up();
-//	if (keycode == 125)
-//		zoom_down();
+	if (keycode == 125)
+		zoom_down();
+	expose_hook(e);
+	return (0);
+}
+
+int		mouse_hook(int keycode, int x, int y, t_env *e)
+{
+	double	pixel_x;
+	double	pixel_y;
+	double	ecart_x;
+	double	ecart_y;
+	t_var	*var;
+
+	var = get_var();
+	if (keycode == 1)//5
+	{
+		//zoom_mouse();
+	pixel_x = x / var->zoom_x + var->plan_x1;
+	pixel_y = y / var->zoom_y + var->plan_y1;
+
+	ecart_x = pixel_x - ((var->plan_x1 + var->plan_x2) / 2);
+	ecart_y = pixel_y - ((var->plan_y1 + var->plan_y2) / 2);
+	var->plan_x1 = var->plan_x1 + ecart_x;
+	var->plan_x2 = var->plan_x2 + ecart_x;
+	var->plan_y1 = var->plan_y1 + ecart_y;
+	var->plan_y2 = var->plan_y2 + ecart_y;
+	zoom_up();
+	}
+/*	if (keycode == 2) //4
+	{
+		unzoom_mouse();
+	}*/
+	(void)e;
+	(void)x;
+	(void)y;
 	expose_hook(e);
 	return (0);
 }
@@ -102,13 +155,20 @@ void	display(void)
 
 	e.img_ptr = NULL;
 	var = get_var();
-	var->win_abs = 1000;
-	var->win_ord = 1000;
-	var->plan_abs = 3;
-	var->plan_ord = 2;
+	var->win_abs = 500;
+	var->win_ord = 500;
+	var->plan_x1 = -3;
+	var->plan_x2 = 1;
+	var->plan_y1 = -2;
+	var->plan_y2 = 2;
+	var->zoom_x = var->win_abs / (var->plan_x2 - var->plan_x1);
+	var->zoom_y = var->win_ord / (var->plan_y2 - var->plan_y1);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, var->win_abs, var->win_ord, "Fractol - 42");
 	mlx_expose_hook(e.win, expose_hook, &e);
+	mlx_mouse_hook(e.win, mouse_hook, &e);
+	//mlx_hook(var->win_ptr, MOTION_NOTIFY, PTR_MOTION_MASK, ft_motion_hook, var);
+	//mlx_hook(var->win_ptr, KEY_PRESS, KEY_PRESS_MASK, ft_key_hook, var);
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_loop(e.mlx);
 }
