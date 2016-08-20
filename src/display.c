@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:34:05 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/19 16:53:21 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/20 15:42:26 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ int		expose_hook(t_env *e)
 	return (0);
 }
 
+void	set_zoom(t_var *var)
+{
+	var->zoom_x = var->win_abs / (var->plan_x2 - var->plan_x1);
+	var->zoom_y = var->win_ord / (var->plan_y2 - var->plan_y1);
+}
+
 void	zoom_up(void)
 {
 	t_var	*var;
@@ -87,6 +93,8 @@ void	zoom_up(void)
 	var->plan_x2 = var->plan_x2 / 1.5;
 	var->plan_y1 = var->plan_y1 / 1.5;
 	var->plan_y2 = var->plan_y2 / 1.5;
+	printf("x1: %f - x2: %f\ny1: %f - y2: %f\n\n\n", var->plan_x1, var->plan_x2, var->plan_y1, var->plan_y2);
+	//set_zoom(var);
 }
 
 void	zoom_down(void)
@@ -126,21 +134,32 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	if (keycode == 1)//5
 	{
 		//zoom_mouse();
+
+	pixel_x = x / var->zoom_x + var->plan_x1;
+	pixel_y = y / var->zoom_y + var->plan_y1;
+
+	ecart_x = pixel_x - (var->plan_x1 + var->plan_x2) / 2;
+	ecart_y = pixel_y - (var->plan_y1 + var->plan_y2) / 2;
+	var->plan_x1 = var->plan_x1 + ecart_x;
+	var->plan_x2 = var->plan_x2 + ecart_x;
+	var->plan_y1 = var->plan_y1 + ecart_y;
+	var->plan_y2 = var->plan_y2 + ecart_y;
+//	zoom_up();
+	}
+	if (keycode == 2) //4
+	{
+	//	unzoom_mouse();
 	pixel_x = x / var->zoom_x + var->plan_x1;
 	pixel_y = y / var->zoom_y + var->plan_y1;
 
 	ecart_x = pixel_x - ((var->plan_x1 + var->plan_x2) / 2);
 	ecart_y = pixel_y - ((var->plan_y1 + var->plan_y2) / 2);
-	var->plan_x1 = var->plan_x1 + ecart_x;
-	var->plan_x2 = var->plan_x2 + ecart_x;
-	var->plan_y1 = var->plan_y1 + ecart_y;
-	var->plan_y2 = var->plan_y2 + ecart_y;
-	zoom_up();
+	var->plan_x1 = var->plan_x1 - ecart_x;
+	var->plan_x2 = var->plan_x2 - ecart_x;
+	var->plan_y1 = var->plan_y1 - ecart_y;
+	var->plan_y2 = var->plan_y2 - ecart_y;
+	zoom_down();
 	}
-/*	if (keycode == 2) //4
-	{
-		unzoom_mouse();
-	}*/
 	(void)e;
 	(void)x;
 	(void)y;
@@ -161,8 +180,7 @@ void	display(void)
 	var->plan_x2 = 1;
 	var->plan_y1 = -2;
 	var->plan_y2 = 2;
-	var->zoom_x = var->win_abs / (var->plan_x2 - var->plan_x1);
-	var->zoom_y = var->win_ord / (var->plan_y2 - var->plan_y1);
+	set_zoom(var);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, var->win_abs, var->win_ord, "Fractol - 42");
 	mlx_expose_hook(e.win, expose_hook, &e);
