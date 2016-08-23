@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/19 15:24:19 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/23 19:42:18 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef	struct s_var
 	double	zoom_y;
 	int		win_abs;
 	int		win_ord;
-	int		iteration_max;;
+	int		iteration_max;
 	int		iterations;
 }			t_var;
 
