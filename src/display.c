@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:34:05 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/20 15:42:26 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/23 18:21:46 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,80 @@ void	set_zoom(t_var *var)
 {
 	var->zoom_x = var->win_abs / (var->plan_x2 - var->plan_x1);
 	var->zoom_y = var->win_ord / (var->plan_y2 - var->plan_y1);
+	printf("zoomx: %f - zoomy: %f\n\n", var->zoom_x, var->zoom_y);
 }
 
-void	zoom_up(void)
+void	zoom_up(double pixel_x, double pixel_y)
 {
 	t_var	*var;
-
+	//double		extension_x;
+	//double		extension_y;
+	double		reduc_zoom;
+	double		ecart_plan_point;
 	var = get_var();
-	var->zoom_x = var->zoom_x * 1.5;
-	var->zoom_y = var->zoom_y * 1.5;
-	var->plan_x1 = var->plan_x1 / 1.5;
-	var->plan_x2 = var->plan_x2 / 1.5;
-	var->plan_y1 = var->plan_y1 / 1.5;
-	var->plan_y2 = var->plan_y2 / 1.5;
+
+
+	ecart_plan_point = var->plan_x1 - pixel_x;
+//	ecart_x1 = absolu(ecart_x1);
+	reduc_zoom = ecart_plan_point / 1.5;
+	reduc_zoom = ecart_plan_point - reduc_zoom;
+	var->plan_x1 = var->plan_x1 - reduc_zoom;
+
+	ecart_plan_point = var->plan_x2 - pixel_x;
+//	ecart_x1 = absolu(ecart_x1);
+	reduc_zoom = ecart_plan_point / 1.5;
+	reduc_zoom = ecart_plan_point - reduc_zoom;
+	var->plan_x2 = var->plan_x2 - reduc_zoom;
+
+	ecart_plan_point = var->plan_y1 - pixel_y;
+//	ecart_x1 = absolu(ecart_x1);
+	reduc_zoom = ecart_plan_point / 1.5;
+	reduc_zoom = ecart_plan_point - reduc_zoom;
+	var->plan_y1 = var->plan_y1 - reduc_zoom;
+
+	ecart_plan_point = var->plan_y2 - pixel_y;
+//	ecart_x1 = absolu(ecart_x1);
+	reduc_zoom = ecart_plan_point / 1.5;
+	reduc_zoom = ecart_plan_point - reduc_zoom;
+	var->plan_y2 = var->plan_y2 - reduc_zoom;
+
+/*	extension_x = (var->plan_x2 - var->plan_x1) / 1.5;
+	extension_x = (var->plan_x2 - var->plan_x1) - extension_x;
+
+	if (var->plan_x1 > 0)
+		var->plan_x1 = var->plan_x1 - (extension_x / 2);
+	else
+		var->plan_x1 = var->plan_x1 + (extension_x / 2);
+
+	if (var->plan_x2 > 0)
+		var->plan_x2 = var->plan_x2 - (extension_x / 2);
+	else
+		var->plan_x2 = var->plan_x2 + (extension_x / 2);
+
+	extension_y = (var->plan_y2 - var->plan_y1) / 1.5;
+	extension_y = (var->plan_y2 - var->plan_y1) - extension_y;
+
+	if (var->plan_y1 > 0)
+		var->plan_y1 = var->plan_y1 - (extension_y / 2);
+	else
+		var->plan_y1 = var->plan_y1 + (extension_y / 2);
+	if (var->plan_y2 > 0)
+		var->plan_y2 = var->plan_y2 - (extension_y / 2);
+	else
+		var->plan_y2 = var->plan_y2 + (extension_y / 2);*/
+
+
+//	test_x = (var->plan_x1 - var->plan_x2) / 2 / 1.5;
+//	test_y = (var->plan_y1 - var->plan_y2) / 2 / 1.5;
+
+	//var->zoom_x = var->zoom_x * 1.5;
+	//var->zoom_y = var->zoom_y * 1.5;
+
+	//var->plan_x1 = var->plan_x1 / 1.5;
+//	var->plan_x2 = var->plan_x2 / 1.5;
+//	var->plan_y1 = var->plan_y1 / 1.5;
+//	var->plan_y2 = var->plan_y2 / 1.5;
+	set_zoom(var);
 	printf("x1: %f - x2: %f\ny1: %f - y2: %f\n\n\n", var->plan_x1, var->plan_x2, var->plan_y1, var->plan_y2);
 	//set_zoom(var);
 }
@@ -108,14 +169,15 @@ void	zoom_down(void)
 	var->plan_x2 = var->plan_x2 * 1.5;
 	var->plan_y1 = var->plan_y1 * 1.5;
 	var->plan_y2 = var->plan_y2 * 1.5;
+	printf("x1: %f - x2: %f\ny1: %f - y2: %f\n\n\n", var->plan_x1, var->plan_x2, var->plan_y1, var->plan_y2);
 }
 
 int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 126)
-		zoom_up();
+//	if (keycode == 126)
+//		zoom_up();
 	if (keycode == 125)
 		zoom_down();
 	expose_hook(e);
@@ -133,7 +195,6 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	var = get_var();
 	if (keycode == 1)//5
 	{
-		//zoom_mouse();
 
 	pixel_x = x / var->zoom_x + var->plan_x1;
 	pixel_y = y / var->zoom_y + var->plan_y1;
@@ -144,7 +205,8 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	var->plan_x2 = var->plan_x2 + ecart_x;
 	var->plan_y1 = var->plan_y1 + ecart_y;
 	var->plan_y2 = var->plan_y2 + ecart_y;
-//	zoom_up();
+	zoom_up(pixel_x, pixel_y);
+	printf("x1: %f - x2: %f\ny1: %f - y2: %f\n\n\n", var->plan_x1, var->plan_x2, var->plan_y1, var->plan_y2);
 	}
 	if (keycode == 2) //4
 	{
@@ -158,7 +220,7 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	var->plan_x2 = var->plan_x2 - ecart_x;
 	var->plan_y1 = var->plan_y1 - ecart_y;
 	var->plan_y2 = var->plan_y2 - ecart_y;
-	zoom_down();
+//	zoom_down();
 	}
 	(void)e;
 	(void)x;
@@ -177,7 +239,7 @@ void	display(void)
 	var->win_abs = 500;
 	var->win_ord = 500;
 	var->plan_x1 = -3;
-	var->plan_x2 = 1;
+	var->plan_x2 = 3;
 	var->plan_y1 = -2;
 	var->plan_y2 = 2;
 	set_zoom(var);
