@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/23 23:08:53 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/24 17:23:48 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 #include <mlx.h>
 #include <math.h>
 #include "../libft/includes/libft.h"
+
 # define PTR_MOTION_MASK (1L<<6)
 # define MOTION_NOTIFY 6
+//#define NoEventMask 0L
 //# define KEY_PRESS_MASK (1L<<0)
 //# define KEY_PRESS 3
 
@@ -46,11 +48,15 @@ typedef	struct s_var
 	int		win_ord;
 	int		iteration_max;
 	int		iterations;
-	int	(*type)(double, double, struct s_var *); // changer_nom ?
+	int	(*fractal_func)(double, double, struct s_var *); // changer_nom ?
+	int		index_fractal;//
 	double	julia_x;
 	double	julia_y;
+	double	color_number;
+	int		stop_motion_hook;
 }			t_var;
 
+int		burning_ship(double pixel_x, double pixel_y, t_var *var);
 void	display(t_env *e);
 void	draw2(t_env *e);
 int		expose_hook(t_env *e);
