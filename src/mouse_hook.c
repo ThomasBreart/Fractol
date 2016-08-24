@@ -6,63 +6,28 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:29:50 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/24 15:07:11 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/08/24 19:55:31 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	axis_reduction(double axis_limit, const double pixel_coord_axis)
+int		motion_hook(int x, int y, t_env *e)
 {
-	double		reduc_gap;
-	double		gap_plan_point;
-
-	gap_plan_point = axis_limit - pixel_coord_axis;
-	reduc_gap = gap_plan_point / 1.5;
-	reduc_gap = gap_plan_point - reduc_gap;
-	axis_limit -= reduc_gap;
-	return (axis_limit);
-}
-
-void	zoom_up(const double pixel_x, const double pixel_y)
-{
+	double	zoom_julia_x;
+	double	zoom_julia_y;
 	t_var	*var;
 
 	var = get_var();
-	var->plan_x1 = axis_reduction(var->plan_x1, pixel_x);
-	var->plan_x2 = axis_reduction(var->plan_x2, pixel_x);
-	var->plan_y1 = axis_reduction(var->plan_y1, pixel_y);
-	var->plan_y2 = axis_reduction(var->plan_y2, pixel_y);
-	set_zoom(var);
-//	printf("x1: %f - x2: %f\ny1: %f - y2: %f\n\n\n", var->plan_x1, var->plan_x2, var->plan_y1, var->plan_y2);
-}
-
-double	axis_increase(double axis_limit, const double pixel_coord_axis)
-{
-	double		increase_gap;
-	double		gap_plan_point;
-
-	gap_plan_point = axis_limit - pixel_coord_axis;
-	increase_gap = gap_plan_point * 1.5;
-	increase_gap = increase_gap - gap_plan_point;
-	if (axis_limit < 0)
-		axis_limit += increase_gap;
-	else
-		axis_limit += increase_gap;
-	return (axis_limit);
-}
-
-void	zoom_down(const double pixel_x, const double pixel_y)
-{
-	t_var	*var;
-
-	var = get_var();
-	var->plan_x1 = axis_increase(var->plan_x1, pixel_x);
-	var->plan_x2 = axis_increase(var->plan_x2, pixel_x);
-	var->plan_y1 = axis_increase(var->plan_y1, pixel_y);
-	var->plan_y2 = axis_increase(var->plan_y2, pixel_y);
-	set_zoom(var);
-//	printf("x1: %f - x2: %f\ny1: %f - y2: %f\n\n\n", var->plan_x1, var->plan_x2, var->plan_y1, var->plan_y2);
+	if (var->stop_motion_hook == 0)
+	{
+		zoom_julia_x = var->win_abs / (3 - (-3));
+		zoom_julia_y = var->win_ord / (3 - (-3));
+		var->julia_x = x / zoom_julia_x - 3;
+		var->julia_y = y / zoom_julia_y - 3;
+		expose_hook(e);
+	}
+	return (1);
 }
 
 int		mouse_hook(int keycode, int x, int y, t_env *e)
@@ -84,12 +49,9 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	var->plan_y1 = var->plan_y1 + ecart_y;
 	var->plan_y2 = var->plan_y2 + ecart_y;
 	if (keycode == 1)//5
-	{
-		zoom_up(pixel_x, pixel_y);
-//	printf("x1: %f - x2: %f\ny1: %f - y2: %f\n\n\n", var->plan_x1, var->plan_x2, var->plan_y1, var->plan_y2);
-	}
+		mouse_zoom_up(pixel_x, pixel_y);
 	if (keycode == 2) //4
-		zoom_down(pixel_x, pixel_y);
+		mouse_zoom_down(pixel_x, pixel_y);
 	expose_hook(e);
 	return (0);
 }
