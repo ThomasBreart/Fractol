@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/24 20:23:57 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/08 18:24:43 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ typedef	struct s_var
 	double	z_save;
 }			t_var;
 
+typedef struct s_comp
+{
+	double		r;
+	double		i;
+}				t_comp;
+
 double	absolu_for_double(double number);
 int		burning_ship(double pixel_x, double pixel_y, t_var *var);
 void	change_fractal_up(void);
@@ -86,4 +92,12 @@ void	set_zoom(t_var *var);
 void	stop_motion_hook(void);
 void	mouse_zoom_up(const double pixel_x, const double pixel_y);
 void	mouse_zoom_down(const double pixel_x, const double pixel_y);
+
+t_comp	ft_addcomp(t_comp z1, t_comp z2);
+t_comp	ft_mulcomp(t_comp z1, t_comp z2);
+t_comp	ft_divcomp(t_comp z1, t_comp z2);
+t_comp	ft_subcomp(t_comp z1, t_comp z2);
+t_comp	ft_initcomp(double r, double i);
+t_comp	ft_mulcompreal(t_comp z1, double k);
+t_comp	ft_subcompreal(t_comp z1, double k);
 #endif

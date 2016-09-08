@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/24 20:07:06 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/24 20:08:31 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/08 09:55:06 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,33 @@ static void	draw(t_env *e)
 		++pixel_y;
 	}
 }
+/*
+static void	draw_gpu(t_env *e)
+{
+	t_var	*var;
+	int		prob_size;
 
+	var = get_var();
+	// alloc mem
+	double * tpixel_x = (double*)malloc(var->win_abs * sizeof(double));
+	double * tpixel_y = (double*)malloc(var->win_ord * sizeof(double));
+	double * tzoom_y = (double*)malloc(var->win_ord * sizeof(double));
+	double * tzoom_x = (double*)malloc(var->win_abs * sizeof(double));
+	double * tplan_x1 = (double*)malloc(var->win_abs * sizeof(double));
+	double * tplan_y1 = (double*)malloc(var->win_ord * sizeof(double));
+	double * tplan_y1 = (double*)malloc(var->win_ord * sizeof(double));
+	double * tplan_y1 = (double*)malloc(var->win_ord * sizeof(double));
+	double * tplan_y1 = (double*)malloc(var->win_ord * sizeof(double));
+	double * tplan_y1 = (double*)malloc(var->win_ord * sizeof(double));
+	//prob_size = var->win_abs * var->win_ord;
+	
+}
+*/
 int			expose_hook(t_env *e)
 {
 	prepare_draw(e);
 	draw(e);
+	//draw_gpu(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
 	return (0);
 }
