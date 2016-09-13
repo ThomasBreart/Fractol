@@ -15,7 +15,7 @@ $(NAME): $(OBJ)
 	@echo "-> Building libft"
 	@make -C $(LIBFT)
 	@echo "-> Linkin"
-	@$(CC) -o $@ $(OBJ) $(FLAGS) $(LIBFT)libft.a $(LMLX) -I $(IDIR)
+	@$(CC) -o $@ $(OBJ) $(FLAGS) $(LIBFT)libft.a $(LMLX) -framework opencl -I $(IDIR)
 	@echo "-> Perfect !"
 
 %.o: %.c

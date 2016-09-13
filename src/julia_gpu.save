@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   julia_gpu.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/10 11:19:23 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/10 12:28:41 by tbreart          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"
+//ex: fenetre 1000x1000
+int		julia_gpu(int *tab_pixel, const t_var *var)
+{
+	float		z;
+	float		c_x;
+	float		c_y;
+	float		tmp;
+	float		pixel_x;
+	float		pixel_y;
+	int			i;
+	int			y;
+
+	i = get_global_id(0);
+	pixel_x = i % var->win_abs;
+	pixel_y = i / var->win_abs;
+	pixel_x = pixel_x / var->zoom_x + var->plan_x1;
+	pixel_y = pixel_y / var->zoom_y + var->plan_y1;
+	c_x = var->julia_x;
+	c_y = var->julia_y;
+	//var->iterations = 0;
+	y = 0;
+	while (y < var->iteration_max)
+	{
+		tmp = pixel_x;
+		pixel_x = ft_carre(pixel_x) - ft_carre(pixel_y) + c_x;
+		pixel_y = 2 * tmp * pixel_y + c_y;
+		z = ft_carre(pixel_x) + ft_carre(pixel_y);
+		if (z > 4)
+			return (0);
+		++y;
+	}
+	tab_pixel[i] = y;
+	return (0);
+}

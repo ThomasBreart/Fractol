@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/08 18:24:43 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/12 19:14:01 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <Opencl/opencl.h>
 
 #include <mlx.h>
 #include <math.h>
@@ -92,6 +93,9 @@ void	set_zoom(t_var *var);
 void	stop_motion_hook(void);
 void	mouse_zoom_up(const double pixel_x, const double pixel_y);
 void	mouse_zoom_down(const double pixel_x, const double pixel_y);
+
+void	draw_gpu(t_env *e);
+void	draw_gpu2(t_env *e);
 
 t_comp	ft_addcomp(t_comp z1, t_comp z2);
 t_comp	ft_mulcomp(t_comp z1, t_comp z2);
