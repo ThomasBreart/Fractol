@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:32:52 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/13 13:43:54 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/13 17:29:25 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init(t_env *e)
 	var = get_var();
 	var->win_abs = 1000;
 	var->win_ord = 1000;
-	var->iteration_max = 100;
+	var->iteration_max = 1000;
 	var->color_number = 10;
 	var->stop_motion_hook = 0;
 

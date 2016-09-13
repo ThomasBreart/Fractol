@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:40:07 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/13 14:57:33 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/13 17:21:55 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	draw_gpu2(t_env *e)
 	cl_command_queue	command_queue = NULL;
 
 	cl_mem				memobj = NULL;
+	cl_mem				memobj2 = NULL;
 
 	FILE				*fp;
 	char				fileName[] = "./src/julia.cl";
@@ -56,7 +57,10 @@ void	draw_gpu2(t_env *e)
 
 	image_size = var->win_abs * var->win_ord * sizeof(int);
 	buffer_host = (int*)malloc(image_size);///
-	memobj = clCreateBuffer(context, CL_MEM_WRITE_ONLY, image_size, NULL, &ret);///
+	memobj = clCreateBuffer(context, CL_MEM_WRITE_ONLY, image_size, NULL, &ret);
+
+	memobj2 = clCreateBuffer(context, 0, sizeof(t_var), NULL, &ret);///
+	clEnqueueWriteBuffer(command_queue, memobj2, CL_TRUE, 0, sizeof(t_var), var, 0, NULL, NULL);///
 
 	fp = fopen(fileName, "r");
 	if (!fp)
@@ -75,32 +79,27 @@ void	draw_gpu2(t_env *e)
 	kernel = clCreateKernel(program, "julia_gpu", &ret);
 
 	ret = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void*)&memobj);
+	ret = clSetKernelArg(kernel, 1, sizeof(var), &memobj2);
 	///envoyer aussi d autre vaariables
-	printf("OK HERE1\n");
-
 	size_t		total_size = var->win_abs * var->win_ord;
 	size_t		size2[2];
 	size2[0] = 1000;
 	size2[1] = 1000;
-	printf("OK HERE2\n");
 	ret = clEnqueueNDRangeKernel(command_queue, kernel, 2, NULL, size2, NULL, 0, NULL, NULL);//pas sur de celle ci
-	printf("OK HERE3\n");
 
 	ret = clEnqueueReadBuffer(command_queue, memobj, CL_TRUE, 0, image_size, buffer_host, 0, NULL, NULL);///pas sursur
 
 	ret = clReleaseKernel(kernel);
 	ret = clReleaseProgram(program);
 	ret = clReleaseMemObject(memobj);
+	ret = clReleaseMemObject(memobj2);
 	ret = clReleaseCommandQueue(command_queue);
 	ret = clReleaseContext(context);
 	free(source_str);
 
 	size_t		i = 0;
-	printf("OK HERE4\n");
-	fp = fopen("rendu", "w");
 	while (i < total_size)
 	{
-		fprintf(fp, "--%d\n", buffer_host[i]);
 		var->iterations = buffer_host[i];
 		img_pixel_put(e, i % var->win_abs, i / var->win_abs, var);
 		++i;
