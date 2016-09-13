@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:38:37 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/24 20:23:59 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/13 18:59:54 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int		key_hook(int keycode, t_env *e)
 	if (keycode == 49)
 		stop_motion_hook();
 	if (keycode == 53)
+	{
+		if (var->opencl == 1)
+			free_opencl();
 		exit(0);
+	}
 	if (keycode == 69)
 		iteration_max_up();
 	if (keycode == 78)

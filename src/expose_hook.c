@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/24 20:07:06 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/12 19:27:12 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/13 18:56:15 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	prepare_draw(t_env *e)
 	e->img_ptr = mlx_new_image(e->mlx, var->win_abs, var->win_ord); ///
 	e->data = mlx_get_data_addr(e->img_ptr, &e->bpp, &e->sizeline, &endian);
 }
-/*
+
 static void	draw(t_env *e)
 {
 	double		pixel_x;
@@ -47,12 +47,17 @@ static void	draw(t_env *e)
 		++pixel_y;
 	}
 }
-*/
+
 int			expose_hook(t_env *e)
 {
+	t_var	*var;
+
+	var = get_var();
 	prepare_draw(e);
-	//draw(e);
-	draw_gpu2(e);
+	if (var->opencl == 1)
+		draw_gpu2(e);
+	else
+		draw(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
 	return (0);
 }
