@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/24 20:07:06 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/13 18:56:15 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/13 19:37:31 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			expose_hook(t_env *e)
 	var = get_var();
 	prepare_draw(e);
 	if (var->opencl == 1)
-		draw_gpu2(e);
+		draw_gpu(e);
 	else
 		draw(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);

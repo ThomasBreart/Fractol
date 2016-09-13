@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/13 19:00:19 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/13 19:55:34 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef	struct s_opencl
 	cl_mem				memobj; // changer nom
 	cl_mem				memobj2;//
 	cl_program			program;
-	cl_kernel			kernel;
+	cl_kernel			kernel[4];
 	size_t				image_size;
 	int					*buffer_host;
 	size_t				image[2];
@@ -114,7 +114,6 @@ void	mouse_zoom_up(const double pixel_x, const double pixel_y);
 void	mouse_zoom_down(const double pixel_x, const double pixel_y);
 
 void	draw_gpu(t_env *e);
-void	draw_gpu2(t_env *e);
 
 t_opencl	*get_opencl(void);
 void		init_opencl(t_var *var);
