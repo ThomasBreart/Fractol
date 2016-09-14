@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/13 19:55:34 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/14 18:06:46 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef	struct s_var
 	int		win_ord;
 	int		iteration_max;
 	int		iterations;
-	int	(*fractal_func[5])(double, double, struct s_var *); // changer_nom ?
+	int	(*fractal_func[8])(double, double, struct s_var *); // changer_nom ?
 	int		fractal_index;//
 	double	julia_x;
 	double	julia_y;
@@ -84,6 +84,7 @@ typedef struct s_comp
 }				t_comp;
 
 double	absolu_for_double(double number);
+int		barnsleyj(double pixel_x, double pixel_y, t_var *var);
 int		burning_ship(double pixel_x, double pixel_y, t_var *var);
 void	change_fractal_up(void);
 void	change_fractal_down(void);
@@ -106,9 +107,12 @@ int		julia_ship(double pixel_x, double pixel_y, t_var *var);
 int		plop(double pixel_x, double pixel_y, t_var *var);
 int		key_hook(int keycode, t_env *e);
 int		mandelbrot(double pixel_x, double pixel_y, t_var *var);
+int		manowar(double pixel_x, double pixel_y, t_var *var);
+int		multibrot(double pixel_x, double pixel_y, t_var *var);
 int		motion_hook(int x, int y, t_env *e);
 int		mouse_hook(int keycode, int x, int y, t_env *e);
 void	set_zoom(t_var *var);
+int		spider(double pixel_x, double pixel_y, t_var *var);
 void	stop_motion_hook(void);
 void	mouse_zoom_up(const double pixel_x, const double pixel_y);
 void	mouse_zoom_down(const double pixel_x, const double pixel_y);

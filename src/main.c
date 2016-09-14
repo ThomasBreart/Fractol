@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:32:52 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/13 21:26:35 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/14 18:06:42 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ void	init(t_env *e, char *opt)
 	var = get_var();
 	var->win_abs = 1000;
 	var->win_ord = 1000;
-	var->iteration_max = 1000;
+	var->iteration_max = 100;
 	var->color_number = 10;
-	var->stop_motion_hook = 0;
+	var->stop_motion_hook = 1;
 
 	var->fractal_func[0] = mandelbrot;
 	var->fractal_func[1] = julia;
 	var->fractal_func[2] = burning_ship;
 	var->fractal_func[3] = julia_ship;
-	var->fractal_func[4] = plop;
+	var->fractal_func[4] = multibrot;
+	var->fractal_func[5] = manowar;
+	var->fractal_func[6] = barnsleyj;
+	var->fractal_func[7] = spider;
 	e->img_ptr = NULL;
 	
 	if (ft_strcmp(opt, "--OpenCL") == 0)
@@ -55,7 +58,7 @@ void	init(t_env *e, char *opt)
 
 int	invalid_argument(void)
 {
-	ft_putendl("usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning_ship | Julia_ship");
+	ft_putendl("usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning_ship | Julia_ship | Multibrot | Manowar | Barnsleyj | Spider");
 	return (1);
 }
 
@@ -75,8 +78,14 @@ int	main(int ac, char **av)
 		var->fractal_index = 2;
 	else if (ft_strcmp(av[ac - 1], "Julia_ship") == 0)
 		var->fractal_index = 3;
-	else if (ft_strcmp(av[ac - 1], "plop") == 0)
+	else if (ft_strcmp(av[ac - 1], "Multibrot") == 0)
 		var->fractal_index = 4;
+	else if (ft_strcmp(av[ac - 1], "Manowar") == 0)
+		var->fractal_index = 5;
+	else if (ft_strcmp(av[ac - 1], "Barnsleyj") == 0)
+		var->fractal_index = 6;
+	else if (ft_strcmp(av[ac - 1], "Spider") == 0)
+		var->fractal_index = 7;
 	else
 		return (invalid_argument());
 	init(&e, av[1]);
