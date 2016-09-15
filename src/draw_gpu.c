@@ -23,6 +23,10 @@ void	init_opencl(t_var *var)
 	opencl->kernel[1] = NULL;
 	opencl->kernel[2] = NULL;
 	opencl->kernel[3] = NULL;
+	opencl->kernel[4] = NULL;
+	opencl->kernel[5] = NULL;
+	opencl->kernel[6] = NULL;
+	opencl->kernel[7] = NULL;
 
 	opencl->ret = clGetPlatformIDs(1, &opencl->platform_id, &opencl->ret_num_platforms);
 
@@ -55,7 +59,10 @@ void	init_opencl(t_var *var)
 	opencl->kernel[1] = clCreateKernel(opencl->program, "julia_gpu", &opencl->ret);
 	opencl->kernel[2] = clCreateKernel(opencl->program, "burning_ship_gpu", &opencl->ret);
 	opencl->kernel[3] = clCreateKernel(opencl->program, "julia_ship_gpu", &opencl->ret);
-//	opencl->kernel[4] = clCreateKernel(opencl->program, "plop_gpu", &opencl->ret);
+	opencl->kernel[4] = clCreateKernel(opencl->program, "multibrot_gpu", &opencl->ret);
+	opencl->kernel[5] = clCreateKernel(opencl->program, "manowar_gpu", &opencl->ret);
+	opencl->kernel[6] = clCreateKernel(opencl->program, "barnsleyj_gpu", &opencl->ret);
+	opencl->kernel[7] = clCreateKernel(opencl->program, "spider_gpu", &opencl->ret);
 
 	opencl->ret = clSetKernelArg(opencl->kernel[0], 0, sizeof(cl_mem), (void*)&opencl->memobj);
 	opencl->ret = clSetKernelArg(opencl->kernel[0], 1, sizeof(var), &opencl->memobj2);
@@ -65,6 +72,14 @@ void	init_opencl(t_var *var)
 	opencl->ret = clSetKernelArg(opencl->kernel[2], 1, sizeof(var), &opencl->memobj2);
 	opencl->ret = clSetKernelArg(opencl->kernel[3], 0, sizeof(cl_mem), (void*)&opencl->memobj);
 	opencl->ret = clSetKernelArg(opencl->kernel[3], 1, sizeof(var), &opencl->memobj2);
+	opencl->ret = clSetKernelArg(opencl->kernel[4], 0, sizeof(cl_mem), (void*)&opencl->memobj);
+	opencl->ret = clSetKernelArg(opencl->kernel[4], 1, sizeof(var), &opencl->memobj2);
+	opencl->ret = clSetKernelArg(opencl->kernel[5], 0, sizeof(cl_mem), (void*)&opencl->memobj);
+	opencl->ret = clSetKernelArg(opencl->kernel[5], 1, sizeof(var), &opencl->memobj2);
+	opencl->ret = clSetKernelArg(opencl->kernel[6], 0, sizeof(cl_mem), (void*)&opencl->memobj);
+	opencl->ret = clSetKernelArg(opencl->kernel[6], 1, sizeof(var), &opencl->memobj2);
+	opencl->ret = clSetKernelArg(opencl->kernel[7], 0, sizeof(cl_mem), (void*)&opencl->memobj);
+	opencl->ret = clSetKernelArg(opencl->kernel[7], 1, sizeof(var), &opencl->memobj2);
 	opencl->image[0] = var->win_abs;
 	opencl->image[1] = var->win_ord;
 	free(source_str);
@@ -79,6 +94,10 @@ void	free_opencl(void)
 	opencl->ret = clReleaseKernel(opencl->kernel[1]);
 	opencl->ret = clReleaseKernel(opencl->kernel[2]);
 	opencl->ret = clReleaseKernel(opencl->kernel[3]);
+	opencl->ret = clReleaseKernel(opencl->kernel[4]);
+	opencl->ret = clReleaseKernel(opencl->kernel[5]);
+	opencl->ret = clReleaseKernel(opencl->kernel[6]);
+	opencl->ret = clReleaseKernel(opencl->kernel[7]);
 	opencl->ret = clReleaseProgram(opencl->program);
 	opencl->ret = clReleaseMemObject(opencl->memobj);
 	opencl->ret = clReleaseMemObject(opencl->memobj2);

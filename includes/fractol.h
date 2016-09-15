@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/15 18:55:57 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/15 19:54:35 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef	struct s_opencl
 	cl_mem				memobj; // changer nom
 	cl_mem				memobj2;//
 	cl_program			program;
-	cl_kernel			kernel[4];
+	cl_kernel			kernel[8];
 	size_t				image_size;
 	int					*buffer_host;
 	size_t				image[2];

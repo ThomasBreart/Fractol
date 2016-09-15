@@ -1,4 +1,10 @@
 
+typedef struct s_comp
+{
+	double		r;
+	double		i;
+}				t_comp;
+
 typedef	struct s_var
 {
 	double	plan_x1;
@@ -21,12 +27,157 @@ typedef	struct s_var
 	int		opencl;
 }			t_var;
 
+t_comp		ft_addcomp(t_comp z1, t_comp z2)
+{
+	z1.r += z2.r;
+	z1.i += z2.i;
+	return (z1);
+}
+
+t_comp		ft_mulcomp(t_comp z1, t_comp z2)
+{
+	t_comp	tmp;
+
+	tmp.r = z1.r * z2.r - z1.i * z2.i;
+	tmp.i = z2.r * z1.i + z1.r * z2.i;
+	return (tmp);
+}
+
+t_comp		ft_mulcompreal(t_comp z1, double k)
+{
+	z1.r *= k;
+	z1.i *= k;
+	return (z1);
+}
+
+t_comp		ft_subcomp(t_comp z1, t_comp z2)
+{
+	z1.r -= z2.r;
+	z1.i -= z2.i;
+	return (z1);
+}
+
+t_comp		ft_initcomp(double r, double i)
+{
+	t_comp	tmp;
+
+	tmp.r = r;
+	tmp.i = i;
+	return (tmp);
+}
+
 double			absolu_for_double(double x)
 {
 	if (x < 0)
 		return (x * -1);
 	else
 		return (x);
+}
+
+__kernel void	spider_gpu(__global int *out, __global t_var *var)
+{
+	t_comp		z;
+	t_comp		c;
+	int			iterations;
+	int			idx;
+
+	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
+	z = ft_initcomp(get_global_id(0) / var->zoom_x + var->plan_x1,
+					get_global_id(1) / var->zoom_y + var->plan_y1);
+	c = z;
+	iterations = 0;
+	while (iterations < var->iteration_max)
+	{
+		z = ft_addcomp(ft_mulcomp(z, z), c);
+		c.r /= 2;
+		c.i /= 2;
+		c = ft_addcomp(c, z);
+		if (z.r * z.r + z.i * z.i > 4)
+			break ;
+		++iterations;
+	}
+	out[idx] = iterations;
+}
+
+__kernel void	barnsleyj_gpu(__global int *out, __global t_var *var)
+{
+	t_comp	z;
+	t_comp	c;
+	int			iterations;
+	int			idx;
+
+	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
+	c = ft_initcomp(var->julia_x, var->julia_y);
+	z = ft_initcomp(get_global_id(0) / var->zoom_x + var->plan_x1,
+					get_global_id(1) / var->zoom_y + var->plan_y1);
+	iterations = 0;
+	while (iterations < var->iteration_max)
+	{
+		if (z.r > 0)
+		{
+			z.r -= 1;
+			z = ft_mulcomp(z, c);
+		}
+		else
+		{
+			z.r += 1;
+			z = ft_mulcomp(z, c);
+		}
+		if ((z.r * z.r + z.i * z.i) > 4)
+			break ;
+		++iterations;
+	}
+	out[idx] = iterations;
+
+}
+
+__kernel void	manowar_gpu(__global int *out, __global t_var *var)
+{
+	t_comp		z;
+	t_comp		c;
+	t_comp		m;
+	t_comp		tmp;
+	int			iterations;
+	int			idx;
+
+	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
+	c = ft_initcomp(get_global_id(0) / var->zoom_x + var->plan_x1,
+			get_global_id(1) / var->zoom_y + var->plan_y1);
+	z = ft_initcomp(0, 0);
+	m = z;
+	iterations = 0;
+	while (iterations < var->iteration_max)
+	{
+		tmp = z;
+		z = ft_addcomp(ft_addcomp(ft_mulcomp(z, z), m), c);
+		if (z.r * z.r + z.i * z.i > 4)
+			break ;
+		m = tmp;
+		++iterations;
+	}
+	out[idx] = iterations;
+}
+
+__kernel void	multibrot_gpu(__global int *out, __global t_var *var)
+{
+	t_comp		z;
+	t_comp		c;
+	int			iterations;
+	int			idx;
+
+	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
+	z = ft_initcomp(get_global_id(0) / var->zoom_x + var->plan_x1,
+					get_global_id(1) / var->zoom_y + var->plan_y1);
+	c = z;
+	iterations = 0;
+	while (iterations < var->iteration_max)
+	{
+		z = ft_addcomp(ft_mulcomp(ft_mulcomp(ft_mulcomp(z, z), z), z), c);
+		if (z.r * z.r + z.i * z.i > 4)
+			break ;
+		++iterations;
+	}
+	out[idx] = iterations;
 }
 
 __kernel void	julia_ship_gpu(__global int *out, __global t_var *var)
