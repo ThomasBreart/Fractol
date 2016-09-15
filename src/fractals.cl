@@ -11,7 +11,7 @@ typedef	struct s_var
 	int		win_ord;
 	int		iteration_max;
 	int		iterations;
-	int	(*fractal_func[5])(double, double, struct s_var *);
+	int	(*fractal_func[8])(double, double, struct s_var *);
 	int		fractal_index;//
 	double	julia_x;
 	double	julia_y;

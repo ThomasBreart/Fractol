@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/14 18:06:46 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/15 18:55:57 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,13 @@ typedef struct s_comp
 	double		i;
 }				t_comp;
 
+typedef struct s_options
+{
+	char		short_name;
+	char		*long_name;
+	int			set;
+}				t_options;
+
 double	absolu_for_double(double number);
 int		barnsleyj(double pixel_x, double pixel_y, t_var *var);
 int		burning_ship(double pixel_x, double pixel_y, t_var *var);
@@ -122,7 +129,9 @@ void	draw_gpu(t_env *e);
 t_opencl	*get_opencl(void);
 void		init_opencl(t_var *var);
 void		free_opencl(void);
-
+int			options_manager(char **av, char ***next_av, t_options *options);
+int			is_set_short_option(t_options *options, const char option_name);
+int			is_set_long_option(t_options *options, const char *option_name);
 t_comp	ft_addcomp(t_comp z1, t_comp z2);
 t_comp	ft_mulcomp(t_comp z1, t_comp z2);
 t_comp	ft_divcomp(t_comp z1, t_comp z2);

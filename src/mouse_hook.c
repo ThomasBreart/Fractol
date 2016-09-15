@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:29:50 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/24 19:55:31 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/15 19:11:10 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int		motion_hook(int x, int y, t_env *e)
 	var = get_var();
 	if (var->stop_motion_hook == 0)
 	{
-		zoom_julia_x = var->win_abs / (3 - (-3));
-		zoom_julia_y = var->win_ord / (3 - (-3));
-		var->julia_x = x / zoom_julia_x - 3;
-		var->julia_y = y / zoom_julia_y - 3;
+		zoom_julia_x = var->win_abs / (var->plan_x2 - var->plan_x1);
+		zoom_julia_y = var->win_ord / (var->plan_y2 - var->plan_y1);
+		var->julia_x = x / zoom_julia_x - var->plan_x2;
+		var->julia_y = y / zoom_julia_y - var->plan_y2;
 		expose_hook(e);
 	}
 	return (1);
