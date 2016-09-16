@@ -25,6 +25,7 @@ typedef	struct s_var
 	int		stop_motion_hook;
 	double	z_save;
 	int		opencl;
+	int		hud;
 }			t_var;
 
 t_comp		ft_addcomp(t_comp z1, t_comp z2)

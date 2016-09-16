@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:38:37 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/13 18:59:54 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/16 23:15:07 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ int		key_hook(int keycode, t_env *e)
 		change_fractal_up();
 	if (keycode == 121)
 		change_fractal_down();
+	if (keycode == 106)
+	{
+		if (var->hud == 0)
+			var->hud = 1;
+		else
+			var->hud = 0;
+	}
 	expose_hook(e);
 	return (0);
 }

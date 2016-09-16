@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/24 20:07:06 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/15 20:53:02 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 00:31:46 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ int			expose_hook(t_env *e)
 	else
 		draw(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img_ptr, 0, 0);
-	mlx_string_put(e->mlx, e->win, 200, 200, 0xFFFFFF, "prout lol");
+	show_hud(e);
 	return (0);
 }

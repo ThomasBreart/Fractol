@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:29:50 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/15 19:11:10 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 00:23:14 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	var->plan_x2 = var->plan_x2 + ecart_x;
 	var->plan_y1 = var->plan_y1 + ecart_y;
 	var->plan_y2 = var->plan_y2 + ecart_y;
-	if (keycode == 1)//5
+	if (keycode == 1 || keycode == 5)
 		mouse_zoom_up(pixel_x, pixel_y);
-	if (keycode == 2) //4
+	if (var->zoom_x > 50 && var->zoom_y > 50 && (keycode == 2 || keycode == 4))
 		mouse_zoom_down(pixel_x, pixel_y);
 	expose_hook(e);
 	return (0);

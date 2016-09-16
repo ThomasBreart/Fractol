@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:32:52 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/15 19:41:42 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 00:32:01 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		init(t_env *e, t_options *options)
 	var->iteration_max = 1000;
 	var->color_number = 10;
 	var->stop_motion_hook = 1;
+	var->hud = 0;
 	var->fractal_func[0] = mandelbrot;
 	var->fractal_func[1] = julia;
 	var->fractal_func[2] = burning_ship;

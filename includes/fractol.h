@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/15 19:54:35 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/16 23:12:31 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef	struct s_var
 	int		stop_motion_hook;
 	double	z_save;
 	int		opencl;
+	int		hud;
 }			t_var;
 
 typedef	struct s_opencl
@@ -125,6 +126,7 @@ void	mouse_zoom_up(const double pixel_x, const double pixel_y);
 void	mouse_zoom_down(const double pixel_x, const double pixel_y);
 
 void	draw_gpu(t_env *e);
+void	show_hud(t_env *e);
 
 t_opencl	*get_opencl(void);
 void		init_opencl(t_var *var);
