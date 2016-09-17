@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/24 19:50:56 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/24 19:52:00 by tbreart          ###   ########.fr       */
+/*   Created: 2016/09/18 01:14:04 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/18 01:17:10 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static double	axis_reduction(double axis_limit, const double pixel_coord_axis)
 {
-	double	reduc_gap;
-	double	gap_plan_point;
+	double reduc_gap;
+	double gap_plan_point;
 
 	gap_plan_point = axis_limit - pixel_coord_axis;
 	reduc_gap = gap_plan_point / 1.5;

@@ -6,13 +6,13 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:29:50 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 00:23:14 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/18 01:16:38 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		motion_hook(int x, int y, t_env *e)
+int				motion_hook(int x, int y, t_env *e)
 {
 	double	zoom_julia_x;
 	double	zoom_julia_y;
@@ -30,17 +30,10 @@ int		motion_hook(int x, int y, t_env *e)
 	return (1);
 }
 
-int		mouse_hook(int keycode, int x, int y, t_env *e)
+static void		center_zoom(t_var *var, double pixel_x, double pixel_y)
 {
-	double	pixel_x;
-	double	pixel_y;
 	double	ecart_x;
 	double	ecart_y;
-	t_var	*var;
-
-	var = get_var();
-	pixel_x = x / var->zoom_x + var->plan_x1;
-	pixel_y = y / var->zoom_y + var->plan_y1;
 
 	ecart_x = pixel_x - (var->plan_x1 + var->plan_x2) / 2;
 	ecart_y = pixel_y - (var->plan_y1 + var->plan_y2) / 2;
@@ -48,10 +41,31 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	var->plan_x2 = var->plan_x2 + ecart_x;
 	var->plan_y1 = var->plan_y1 + ecart_y;
 	var->plan_y2 = var->plan_y2 + ecart_y;
-	if (keycode == 1 || keycode == 5)
+}
+
+int				mouse_hook(int keycode, int x, int y, t_env *e)
+{
+	double	pixel_x;
+	double	pixel_y;
+	t_var	*var;
+
+	var = get_var();
+	pixel_x = x / var->zoom_x + var->plan_x1;
+	pixel_y = y / var->zoom_y + var->plan_y1;
+	if (keycode == 5)
 		mouse_zoom_up(pixel_x, pixel_y);
-	if (var->zoom_x > 50 && var->zoom_y > 50 && (keycode == 2 || keycode == 4))
+	else if (keycode == 1)
+	{
+		center_zoom(var, pixel_x, pixel_y);
+		mouse_zoom_up(pixel_x, pixel_y);
+	}
+	else if (var->zoom_x > 50 && var->zoom_y > 50 && keycode == 4)
 		mouse_zoom_down(pixel_x, pixel_y);
+	else if (var->zoom_x > 50 && var->zoom_y > 50 && keycode == 2)
+	{
+		center_zoom(var, pixel_x, pixel_y);
+		mouse_zoom_down(pixel_x, pixel_y);
+	}
 	expose_hook(e);
 	return (0);
 }

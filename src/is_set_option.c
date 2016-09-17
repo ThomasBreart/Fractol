@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 03:43:33 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 03:43:42 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 03:54:44 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int		is_set_long_option(t_options *options, const char *option_name)
 {
 	while (options->set != -1)
 	{
-		if (options->long_name != NULL && ft_strcmp(option_name, options->long_name) == 0)
+		if (options->long_name != NULL &&
+							ft_strcmp(option_name, options->long_name) == 0)
 		{
 			if (options->set == 1)
 				return (1);
