@@ -6,7 +6,7 @@
 /*   By: tbreart <tbreart@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 13:15:52 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/18 15:36:47 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 03:25:45 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,19 @@ char		**ft_tabdup(char **source);
 int			ft_tablen(char **taab);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
+typedef struct s_comp
+{
+	double		r;
+	double		i;
+}				t_comp;
+
+
+t_comp	ft_addcomp(t_comp z1, t_comp z2);
+t_comp	ft_mulcomp(t_comp z1, t_comp z2);
+t_comp	ft_divcomp(t_comp z1, t_comp z2);
+t_comp	ft_subcomp(t_comp z1, t_comp z2);
+t_comp	ft_initcomp(double r, double i);
+t_comp	ft_mulcompreal(t_comp z1, double k);
+t_comp	ft_subcompreal(t_comp z1, double k);
 
 #endif

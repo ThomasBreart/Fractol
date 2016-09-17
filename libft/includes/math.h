@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_color_number_1000.c                           :+:      :+:    :+:   */
+/*   math.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/24 20:21:51 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 03:39:27 by tbreart          ###   ########.fr       */
+/*   Created: 2016/09/17 02:24:16 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/17 03:21:21 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
 
-void	color_number_down_1000(void)
-{
-	t_var	*var;
+#ifndef FT_MATH_H
+# define FT_MATH_H
 
-	var = get_var();
-	var->color_number -= 1000;
-}
-
-void	color_number_up_1000(void)
-{
-	t_var	*var;
-
-	var = get_var();
-	var->color_number += 1000;
-}
+#endif

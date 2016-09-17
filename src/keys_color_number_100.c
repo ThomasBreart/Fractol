@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/24 20:22:27 by tbreart           #+#    #+#             */
-/*   Updated: 2016/08/24 20:22:43 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 03:39:14 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	color_number_down_100(void)
 	t_var	*var;
 
 	var = get_var();
-	var->color_number -= 100; // check < 0 ?
+	var->color_number -= 100;
 }
 
 void	color_number_up_100(void)
@@ -25,5 +25,5 @@ void	color_number_up_100(void)
 	t_var	*var;
 
 	var = get_var();
-	var->color_number += 100; // check < 0 ?
+	var->color_number += 100;
 }

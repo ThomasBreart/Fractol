@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:34:05 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/15 19:15:41 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 03:30:31 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_plan(t_var *var)
 	var->plan_x2 = 2;
 	var->plan_y1 = -2;
 	var->plan_y2 = 2;
-
 	var->julia_x = 1;
 	var->julia_y = 1;
 }

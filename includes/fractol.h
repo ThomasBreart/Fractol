@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/16 23:12:31 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 03:28:22 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <Opencl/opencl.h>
+#include <sys/stat.h>
+
 
 #include <mlx.h>
 #include <math.h>
@@ -78,12 +80,6 @@ typedef	struct s_opencl
 	size_t				image[2];
 }				t_opencl;
 
-typedef struct s_comp
-{
-	double		r;
-	double		i;
-}				t_comp;
-
 typedef struct s_options
 {
 	char		short_name;
@@ -127,18 +123,13 @@ void	mouse_zoom_down(const double pixel_x, const double pixel_y);
 
 void	draw_gpu(t_env *e);
 void	show_hud(t_env *e);
-
+void		init(t_env *e, t_options *options);
 t_opencl	*get_opencl(void);
 void		init_opencl(t_var *var);
 void		free_opencl(void);
 int			options_manager(char **av, char ***next_av, t_options *options);
 int			is_set_short_option(t_options *options, const char option_name);
 int			is_set_long_option(t_options *options, const char *option_name);
-t_comp	ft_addcomp(t_comp z1, t_comp z2);
-t_comp	ft_mulcomp(t_comp z1, t_comp z2);
-t_comp	ft_divcomp(t_comp z1, t_comp z2);
-t_comp	ft_subcomp(t_comp z1, t_comp z2);
-t_comp	ft_initcomp(double r, double i);
-t_comp	ft_mulcompreal(t_comp z1, double k);
-t_comp	ft_subcompreal(t_comp z1, double k);
+
+void	create_program(t_opencl *opencl);
 #endif

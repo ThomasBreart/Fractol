@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_color_number_1000.c                           :+:      :+:    :+:   */
+/*   ft_mulcompreal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/24 20:21:51 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 03:39:27 by tbreart          ###   ########.fr       */
+/*   Created: 2016/09/17 02:29:03 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/17 02:29:17 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
-void	color_number_down_1000(void)
+t_comp		ft_mulcompreal(t_comp z1, double k)
 {
-	t_var	*var;
-
-	var = get_var();
-	var->color_number -= 1000;
-}
-
-void	color_number_up_1000(void)
-{
-	t_var	*var;
-
-	var = get_var();
-	var->color_number += 1000;
+	z1.r *= k;
+	z1.i *= k;
+	return (z1);
 }

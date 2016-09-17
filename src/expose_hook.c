@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/24 20:07:06 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 00:31:46 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/17 03:34:48 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	prepare_draw(t_env *e)
 	mlx_clear_window(e->mlx, e->win);
 	if (e->img_ptr != NULL)
 		mlx_destroy_image(e->mlx, e->img_ptr);
-	e->img_ptr = mlx_new_image(e->mlx, var->win_abs, var->win_ord); ///
+	e->img_ptr = mlx_new_image(e->mlx, var->win_abs, var->win_ord);
 	e->data = mlx_get_data_addr(e->img_ptr, &e->bpp, &e->sizeline, &endian);
 }
 
@@ -39,7 +39,6 @@ static void	draw(t_env *e)
 		pixel_x = 0;
 		while (pixel_x < var->win_abs)
 		{
-			//	mlx_hook(e->win, KEY_PRESS, KEY_PRESS_MASK, ft_key_hook, var);
 			var->fractal_func[var->fractal_index](pixel_x, pixel_y, var);
 			img_pixel_put(e, pixel_x, pixel_y, var);
 			++pixel_x;

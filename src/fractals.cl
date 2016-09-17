@@ -283,8 +283,8 @@ __kernel void	mandelbrot_gpu(__global int *out, __global t_var *var)
 	pixel_x = get_global_id(0) / var->zoom_x + var->plan_x1;
 	pixel_y = get_global_id(1) / var->zoom_y + var->plan_y1;
 	idx = get_global_size(0) * get_global_id(1) + get_global_id(0);
-	c_x = pixel_x + var->julia_x;//
-	c_y = pixel_y + var->julia_y;//
+	c_x = pixel_x;
+	c_y = pixel_y;
 	iterations = 0;
 	z = 0;
 	while (iterations < var->iteration_max && z < 4)

@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_color_number_1000.c                           :+:      :+:    :+:   */
+/*   singletons.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/24 20:21:51 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 03:39:27 by tbreart          ###   ########.fr       */
+/*   Created: 2016/09/17 02:07:39 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/17 02:07:54 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	color_number_down_1000(void)
+t_var		*get_var(void)
 {
-	t_var	*var;
+	static	t_var	var;
 
-	var = get_var();
-	var->color_number -= 1000;
+	return (&var);
 }
 
-void	color_number_up_1000(void)
+t_opencl	*get_opencl(void)
 {
-	t_var	*var;
+	static	t_opencl	opencl;
 
-	var = get_var();
-	var->color_number += 1000;
+	return (&opencl);
 }
