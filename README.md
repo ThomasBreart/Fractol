@@ -7,8 +7,10 @@ A graphical application for drawing fractals
 ##Usage
 usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | Multibrot | Manowar | Barnsleyj | Spider
 
-##Features
+##Main features
 - 8 types of fractals available
-- zoom and unzoom
-
-
+- Zoom and unzoom
+- Keyboard controls
+- Edit the shape of the fractal with the position of the mouse
+- Design with OpenCL
+<img style="float:right" align="center" src="http://i.imgur.com/zuWTuWk.png" width="100%" />
