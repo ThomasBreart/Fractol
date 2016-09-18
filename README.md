@@ -9,10 +9,9 @@ usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | M
 
 ##Main features
 
-- 8 types of fractals available <br/>
-- Zoom and unzoom <br/>
-- Keyboard controls <br/>
-- Edit the shape of the fractal with the position of the mouse <br/>
-- Design with OpenCL <br/>
-
+- 8 types of fractals available
+- Zoom and unzoom
+- Keyboard controls
+- Edit the shape of the fractal with the position of the mouse
+- Design with OpenCL
 <img align="right" src="http://i.imgur.com/zuWTuWk.png" width="25%" />
