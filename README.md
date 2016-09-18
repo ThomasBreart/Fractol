@@ -15,4 +15,4 @@ usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | M
 - Edit the shape of the fractal with the position of the mouse <br/>
 - Design with OpenCL <br/>
 </p>
-<img style="float:right" align="center" src="http://i.imgur.com/zuWTuWk.png" width="25%" />
+<img style="float:right" src="http://i.imgur.com/zuWTuWk.png" width="25%" />
