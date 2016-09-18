@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/17 14:34:05 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 03:30:31 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/18 23:07:29 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	display(t_env *e)
 	mlx_expose_hook(e->win, expose_hook, e);
 	mlx_mouse_hook(e->win, mouse_hook, e);
 	mlx_hook(e->win, MOTION_NOTIFY, PTR_MOTION_MASK, motion_hook, e);
-	mlx_key_hook(e->win, key_hook, e);
+	mlx_hook(e->win, 2, 3, key_hook, e);
 	mlx_loop(e->mlx);
 }

@@ -6,7 +6,7 @@
 #    By: tbreart <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 02:14:47 by tbreart           #+#    #+#              #
-#    Updated: 2016/09/18 02:19:18 by tbreart          ###   ########.fr        #
+#    Updated: 2016/09/18 23:05:33 by tbreart          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) ./includes/fractol.h ./Makefile
 	@echo "-> Building libft"
 	@make -C $(LIBFT)
 	@echo "-> Linkin"
