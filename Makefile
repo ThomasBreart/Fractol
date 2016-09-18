@@ -1,10 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tbreart <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/09/18 02:14:47 by tbreart           #+#    #+#              #
+#    Updated: 2016/09/18 02:19:18 by tbreart          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = fractol
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g
 LIBFT = libft/
-LMLX = -lmlx -framework OpenGL -framework AppKit# -L/usr/X11/lib
-IDIR = includes/
+LMLX = -lmlx
+FRAMEWORK = -framework OpenGL -framework AppKit -framework opencl
+IDIR = -I includes
 SRC := $(filter %.c, $(shell find src -type f))
 
 OBJ = $(SRC:.c=.o)
@@ -15,7 +27,7 @@ $(NAME): $(OBJ)
 	@echo "-> Building libft"
 	@make -C $(LIBFT)
 	@echo "-> Linkin"
-	@$(CC) -o $@ $(OBJ) $(FLAGS) $(LIBFT)libft.a $(LMLX) -framework opencl -I $(IDIR)
+	@$(CC) -o $@ $(OBJ) $(FLAGS) $(LIBFT)libft.a $(LMLX) $(FRAMEWORK) $(IDIR)
 	@echo "-> Perfect !"
 
 %.o: %.c

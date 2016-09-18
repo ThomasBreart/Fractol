@@ -6,11 +6,11 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 19:28:31 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 03:44:36 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/18 02:11:48 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
 static int		is_an_option(const char *av)
 {

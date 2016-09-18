@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_initcomp.c                                      :+:      :+:    :+:   */
+/*   ft_divcomp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/17 02:30:12 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 02:30:28 by tbreart          ###   ########.fr       */
+/*   Created: 2016/09/17 02:27:13 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/18 01:35:53 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "math.h"
 
-t_comp		ft_initcomp(double r, double i)
+t_comp		ft_divcomp(t_comp z1, t_comp z2)
 {
 	t_comp	tmp;
 
-	tmp.r = r;
-	tmp.i = i;
+	tmp.r = (z1.r * z2.r + z1.i * z2.i) / (z2.r * z2.r) + (z2.i * z2.i);
+	tmp.i = (z1.i * z2.r - z1.r * z2.i) / (z2.r * z2.r) + (z2.i * z2.i);
 	return (tmp);
 }

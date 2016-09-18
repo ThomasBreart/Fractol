@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/18 01:28:44 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/18 02:08:23 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,6 @@ typedef	struct			s_opencl
 	size_t				image[2];
 }						t_opencl;
 
-typedef struct			s_options
-{
-	char				short_name;
-	char				*long_name;
-	int					set;
-}						t_options;
-
 double					absolu_for_double(double number);
 int						barnsleyj(double pixel_x, double pixel_y, t_var *var);
 int						burning_ship(double pixel_x, double pixel_y,
@@ -104,10 +97,6 @@ void					img_pixel_put(t_env *e, int x, int y, t_var *var);
 void					init(t_env *e, t_options *options);
 void					init_opencl(t_var *var);
 void					init_plan(t_var *var);
-int						is_set_long_option(t_options *options,
-													const char *option_name);
-int						is_set_short_option(t_options *options,
-													const char option_name);
 void					iteration_max_up(void);
 void					iteration_max_down(void);
 int						julia(double pixel_x, double pixel_y, t_var *var);
@@ -122,8 +111,6 @@ void					mouse_zoom_down(const double pixel_x,
 void					mouse_zoom_up(const double pixel_x,
 														const double pixel_y);
 int						mouse_hook(int keycode, int x, int y, t_env *e);
-int						options_manager(char **av, char ***next_av,
-															t_options *options);
 void					set_zoom(t_var *var);
 void					show_hud(t_env *e);
 int						spider(double pixel_x, double pixel_y, t_var *var);

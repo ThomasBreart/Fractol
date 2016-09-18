@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_subcomp.c                                       :+:      :+:    :+:   */
+/*   ft_mulcomp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/17 02:29:39 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 02:29:51 by tbreart          ###   ########.fr       */
+/*   Created: 2016/09/17 02:26:44 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/18 01:36:22 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "math.h"
 
-t_comp		ft_subcomp(t_comp z1, t_comp z2)
+t_comp		ft_mulcomp(t_comp z1, t_comp z2)
 {
-	z1.r -= z2.r;
-	z1.i -= z2.i;
-	return (z1);
+	t_comp	tmp;
+
+	tmp.r = z1.r * z2.r - z1.i * z2.i;
+	tmp.i = z2.r * z1.i + z1.r * z2.i;
+	return (tmp);
 }

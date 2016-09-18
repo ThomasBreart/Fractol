@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mulcompreal.c                                   :+:      :+:    :+:   */
+/*   ft_initcomp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/17 02:29:03 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 02:29:17 by tbreart          ###   ########.fr       */
+/*   Created: 2016/09/17 02:30:12 by tbreart           #+#    #+#             */
+/*   Updated: 2016/09/18 01:36:04 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "math.h"
 
-t_comp		ft_mulcompreal(t_comp z1, double k)
+t_comp		ft_initcomp(double r, double i)
 {
-	z1.r *= k;
-	z1.i *= k;
-	return (z1);
+	t_comp	tmp;
+
+	tmp.r = r;
+	tmp.i = i;
+	return (tmp);
 }
