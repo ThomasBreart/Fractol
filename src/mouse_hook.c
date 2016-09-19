@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:29:50 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/19 02:26:11 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/19 03:28:21 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				motion_hook(int x, int y, t_env *e)
 	return (1);
 }
 
-/*
+
 static void		center_zoom(t_var *var, double pixel_x, double pixel_y)
 {
 	double	ecart_x;
@@ -43,7 +43,7 @@ static void		center_zoom(t_var *var, double pixel_x, double pixel_y)
 	var->plan_y1 = var->plan_y1 + ecart_y;
 	var->plan_y2 = var->plan_y2 + ecart_y;
 }
-*/
+
 int				mouse_hook(int keycode, int x, int y, t_env *e)
 {
 	double	pixel_x;
@@ -57,14 +57,14 @@ int				mouse_hook(int keycode, int x, int y, t_env *e)
 		mouse_zoom_up(pixel_x, pixel_y);
 	else if (keycode == 1)
 	{
-//		center_zoom(var, pixel_x, pixel_y);
+		center_zoom(var, pixel_x, pixel_y);
 		mouse_zoom_up(pixel_x, pixel_y);
 	}
 	else if (var->zoom_x > 50 && var->zoom_y > 50 && keycode == 4)
 		mouse_zoom_down(pixel_x, pixel_y);
 	else if (var->zoom_x > 50 && var->zoom_y > 50 && keycode == 2)
 	{
-	//	center_zoom(var, pixel_x, pixel_y);
+		center_zoom(var, pixel_x, pixel_y);
 		mouse_zoom_down(pixel_x, pixel_y);
 	}
 	expose_hook(e);
