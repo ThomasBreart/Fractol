@@ -1,8 +1,14 @@
-# Fractol - a 42\_school's project
+#Fractol - a 42\_school's project
 
 A graphical application for drawing fractals
 
 <img align="center" src="http://i.imgur.com/ZsUfV8N.png" width="100%" />
+
+##Install & launch
+```bash
+git clone https://github.com/ThomasBreart/Fractol.git ~/Fractol
+cd ~/Fractol && ./fractol --OpenCL Mandelbrot
+```
 
 ##Usage
 usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | Multibrot | Manowar | Barnsleyj | Spider
