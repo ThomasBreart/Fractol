@@ -2,7 +2,7 @@
 
 A graphical application for drawing fractals
 
-<img align="center" src="http://i.imgur.com/1PTUwp7.gif" width="100%" />
+<img align="center" src="http://i.imgur.com/1PTUwp7.gif" width="75%" />
 
 ##Usage
 usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | Multibrot | Manowar | Barnsleyj | Spider
