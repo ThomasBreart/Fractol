@@ -7,11 +7,13 @@ A graphical application for drawing fractals
 ##Install & launch
 ```bash
 git clone https://github.com/ThomasBreart/Fractol.git ~/Fractol
-cd ~/Fractol && ./fractol --OpenCL Mandelbrot
+cd ~/Fractol && make && ./fractol --OpenCL Mandelbrot
 ```
 
 ##Usage
+```bash
 usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | Multibrot | Manowar | Barnsleyj | Spider
+```
 
 ##Main features
 <img align="right" src="http://i.imgur.com/zuWTuWk.png" width="18%" />
