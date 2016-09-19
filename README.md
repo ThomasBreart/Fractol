@@ -60,7 +60,7 @@ usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | M
 </tr>
 <tr>
 <td valign="top" height="30px">Change fractal type</td>
-<td valign="top" align="center"><kbd>&nbsp;page up&nbsp;</kdb> or <kbd>&nbsp;page down&nbsp;</kbd></td>
+<td valign="top" align="center"><kbd>&nbsp;page up&nbsp;</kbd> or <kbd>&nbsp;page down&nbsp;</kbd></td>
 </tr>
 <tr>
 <td valign="top" height="30px">Show the hud / menu</td>
