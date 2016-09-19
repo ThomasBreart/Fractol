@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:29:50 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/19 03:28:21 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/19 04:59:51 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,18 @@ int				mouse_hook(int keycode, int x, int y, t_env *e)
 	var = get_var();
 	pixel_x = x / var->zoom_x + var->plan_x1;
 	pixel_y = y / var->zoom_y + var->plan_y1;
-	if (keycode == 5)
+	if (keycode == MOUSE_WHEEL_UP)
 		mouse_zoom_up(pixel_x, pixel_y);
-	else if (keycode == 1)
+	else if (keycode == MOUSE_LEFT_CLICK)
 	{
 		center_zoom(var, pixel_x, pixel_y);
 		mouse_zoom_up(pixel_x, pixel_y);
 	}
-	else if (var->zoom_x > 50 && var->zoom_y > 50 && keycode == 4)
+	else if (var->zoom_x > 50 && var->zoom_y > 50 &&
+												keycode == MOUSE_WHEEL_DOWN)
 		mouse_zoom_down(pixel_x, pixel_y);
-	else if (var->zoom_x > 50 && var->zoom_y > 50 && keycode == 2)
+	else if (var->zoom_x > 50 && var->zoom_y > 50 &&
+												keycode == MOUSE_RIGHT_CLICK)
 	{
 		center_zoom(var, pixel_x, pixel_y);
 		mouse_zoom_down(pixel_x, pixel_y);

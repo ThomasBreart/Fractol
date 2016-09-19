@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/27 22:09:28 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/18 23:05:54 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/19 04:58:24 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,24 @@
 
 # define PTR_MOTION_MASK (1L<<6)
 # define MOTION_NOTIFY 6
+
+# define KEY_SPACE 49
+# define KEY_ESC 53
+# define KEY_SUM_NUMPAD 69
+# define KEY_SUB_NUMPAD 78
+# define KEY_1_NUMPAD 83
+# define KEY_2_NUMPAD 84
+# define KEY_4_NUMPAD 86
+# define KEY_5_NUMPAD 87
+# define KEY_7_NUMPAD 89
+# define KEY_8_NUMPAD 91
+# define KEY_PAGE_DOWN 121
+# define KEY_PAGE_UP 116
+# define KEY_F16 106
+# define MOUSE_LEFT_CLICK 1
+# define MOUSE_RIGHT_CLICK 2
+# define MOUSE_WHEEL_UP 5
+# define MOUSE_WHEEL_DOWN 4
 
 typedef	struct			s_env
 {

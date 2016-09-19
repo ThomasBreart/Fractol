@@ -6,7 +6,7 @@
 /*   By: tbreart <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/23 20:38:37 by tbreart           #+#    #+#             */
-/*   Updated: 2016/09/17 03:38:25 by tbreart          ###   ########.fr       */
+/*   Updated: 2016/09/19 04:55:50 by tbreart          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static void	key_hook_continue(int keycode, t_var *var)
 {
-	if (keycode == 87)
+	if (keycode == KEY_5_NUMPAD)
 		color_number_up_100();
-	if (keycode == 89)
+	if (keycode == KEY_7_NUMPAD)
 		color_number_down_1000();
-	if (keycode == 91)
+	if (keycode == KEY_8_NUMPAD)
 		color_number_up_1000();
-	if (keycode == 116)
+	if (keycode == KEY_PAGE_UP)
 		change_fractal_up();
-	if (keycode == 121)
+	if (keycode == KEY_PAGE_DOWN)
 		change_fractal_down();
-	if (keycode == 106)
+	if (keycode == KEY_F16)
 	{
 		if (var->hud == 0)
 			var->hud = 1;
@@ -38,23 +38,23 @@ int			key_hook(int keycode, t_env *e)
 	t_var	*var;
 
 	var = get_var();
-	if (keycode == 49)
+	if (keycode == KEY_SPACE)
 		stop_motion_hook();
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 	{
 		if (var->opencl == 1)
 			free_opencl();
 		exit(0);
 	}
-	if (keycode == 69)
+	if (keycode == KEY_SUM_NUMPAD)
 		iteration_max_up();
-	if (keycode == 78)
+	if (keycode == KEY_SUB_NUMPAD)
 		iteration_max_down();
-	if (keycode == 83)
+	if (keycode == KEY_1_NUMPAD)
 		color_number_down_10();
-	if (keycode == 84)
+	if (keycode == KEY_2_NUMPAD)
 		color_number_up_10();
-	if (keycode == 86)
+	if (keycode == KEY_4_NUMPAD)
 		color_number_down_100();
 	key_hook_continue(keycode, var);
 	expose_hook(e);
