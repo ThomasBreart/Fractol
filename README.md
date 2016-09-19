@@ -19,5 +19,5 @@ usage: ./fractol [--OpenCL] Mandelbrot | Julia | Burning\_ship | Julia\_ship | M
 ##Examples
 
 <img align="left" src="http://i.imgur.com/zqlGrmo.gif" width="30%" />
-<img align="center" src="http://i.imgur.com/jVjzJNM.gif" width="30%" />
+<img align="left" src="http://i.imgur.com/jVjzJNM.gif" width="30%" />
 <img align="right" src="http://i.imgur.com/z8SicTT.gif" width="30%" />
